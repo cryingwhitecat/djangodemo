@@ -1,0 +1,10 @@
+bin/**
+lib64
+lib
+**/*.pyc
+**/**/migrations/
+include/*
+share/*
+**/__pycache__/**
+.vscode/**
+

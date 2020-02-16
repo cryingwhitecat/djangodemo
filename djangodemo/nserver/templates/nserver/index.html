@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            {% load static %}
+        <meta charset="utf8"/>
+        <link href="https://fonts.googleapis.com/css?family=Vollkorn&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" href="{% static 'nserver/style.css' %}">
+    </head>
+    <body>
+        {% if latest_posts %}
+            <ul>
+                {% for post in latest_posts %}
+                    <li>
+                        <p>{{ post.Title }}</p>
+                        <p>{{ post.Abstract }}</p>
+                        <p>Was Posted At {{ post.PublishDate }}</p>
+                    </li>
+                {%endfor%}
+            </ul>
+        {% else %}
+        <p>No Posts are avaliable</p>
+        {% endif %}
+    </body>
+</html>
