@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
 from rest_framework.views import APIView
-
+from rest_framework import exceptions
 
 def index(request):
     latest_posts = Post.objects.order_by('PublishDate')
@@ -28,12 +28,6 @@ class PostList(APIView):
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
-        serializer = PostSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class PostDetail(APIView):
     def get_object(self, pk):
         try:
@@ -43,10 +37,15 @@ class PostDetail(APIView):
 
     def get(self, request, pk, format=None):
         post = self.get_object(pk)
-        serializer = PostSerializer(snippet)
+        serializer = PostSerializer(post)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
+        username=request.user.username
+        password=request.user.password
+        user = authentificate(username=username,password=password)
+        if user is None:
+            raise exceptions.AuthenticationFailed('No such user')
         post = self.get_object(pk)
         serializer = PostSerializer(snippet, data=request.data)
         if serializer.is_valid():
@@ -55,6 +54,13 @@ class PostDetail(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
+        
+        username=request.user.username
+        password=request.user.password
+        user = authentificate(username=username,password=password)
+        if user is None:
+            raise exceptions.AuthenticationFailed('No such user')
+
         post = self.get_object(pk)
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

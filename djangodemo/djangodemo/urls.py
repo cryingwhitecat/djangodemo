@@ -22,6 +22,6 @@ from nserver import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'',include('nserver.urls')),
+    url(r'posts/(?P<pk>[a-zA-Z_]+)/', views.PostDetail.as_view()),
     url(r'posts/', views.PostList.as_view()),
-    url(r'posts/(?P<pk>[a-zA-Z_]+)/^', views.PostDetail.as_view()),
 ]
