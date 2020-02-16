@@ -1,24 +1,53 @@
 <!DOCTYPE html>
 <html>
     <head>
-            {% load static %}
+        {% load static %}
         <meta charset="utf8"/>
         <link href="https://fonts.googleapis.com/css?family=Vollkorn&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet"> 
         <link rel="stylesheet" type="text/css" href="{% static 'nserver/style.css' %}">
     </head>
     <body>
-        {% if latest_posts %}
-            <ul>
-                {% for post in latest_posts %}
-                    <li>
-                        <p>{{ post.Title }}</p>
-                        <p>{{ post.Abstract }}</p>
-                        <p>Was Posted At {{ post.PublishDate }}</p>
-                    </li>
-                {%endfor%}
-            </ul>
-        {% else %}
-        <p>No Posts are avaliable</p>
-        {% endif %}
+        <header class="header-container">
+            <div class="top-buttons-container">
+                <p class="politics"><a href="#">Politics</a></p>
+                <p class="stock"><a href="#">Stock Market</a></p>
+                <p class="analytics"><a href="#">Analytics</a></p>
+            </div>
+            <div class="money-container">
+                <p class="euro">€: 13.37</p>
+                <p class="rubble">₽: 0.228</p>
+                <p class="dollar">$: 14.88</p>
+            </div>
+        </header>
+        <main >
+            <p class="page-title">Financial Post</p>
+            <div class= "news-container">
+                {% if latest_posts %}
+                    {% for post in latest_posts %}
+                        <div class="news-block">
+                            <div class="news-title">{{ post.Title }}</div>
+                            <div>
+                                {{ post.Abstract }}...
+                                <a  href="#">Read More</a>
+                                <img class="news-image" src="{{post.ImageUrl}}"/>
+
+                            </div>
+                        </div>
+                    {%endfor%}
+                {% else %}
+                    <p>No Posts are avaliable</p>
+                {% endif %}
+            </div>
+        </main>
+        <footer>
+            <div class="footer-buttons">
+                <a href="#">Contact Us</a>
+                <a href="#" >News Feed</a>
+                <a href="#" >Privacy Policy</a>
+            </div>
+            <p class="copyright">(c) Copyright DjangoDemo</p>
+            <p class="copyright" >2020-Present</p>
+        </footer>
     </body>
 </html>

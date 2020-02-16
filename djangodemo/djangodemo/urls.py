@@ -19,11 +19,7 @@ from django.urls import include,path
 from rest_framework import routers
 from nserver import views
 
-router = routers.DefaultRouter()
-router.register(r'posts', views.PostViewSet)
-
 urlpatterns = [
-    path('', include(router.urls)),
     url(r'^admin/', admin.site.urls),
     url(r'',include('nserver.urls')),
     url(r'posts/', views.PostList.as_view()),
