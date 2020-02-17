@@ -1,1 +1,1 @@
-web: gunicorn djangodemo.wsgi --log-file -b $PORT
+web: gunicorn djangodemo.wsgi -b $PORT
