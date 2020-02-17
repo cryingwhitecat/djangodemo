@@ -1,1 +1,1 @@
-web: gunicorn djangodemo.wsgi  -b $PORT
+web: gunicorn --pythonpath djangodemo djangodemo.wsgi
