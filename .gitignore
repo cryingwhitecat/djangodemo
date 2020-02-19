@@ -6,4 +6,4 @@ include/*
 share/*
 **/__pycache__/**
 .vscode/**
-djangodemo/db.sqlite3
+db.sqlite3
